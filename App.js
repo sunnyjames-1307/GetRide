@@ -1,15 +1,22 @@
-import NavigationContainer from "@react-navigation/native/src/NavigationContainer";
+import { NavigationContainer } from "@react-navigation/native/src/NavigationContainer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { Provider } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-const Stack = createNativeStackNavigator();
+import FirstScreen from "./screens/FirstScreen";
+import UserFirstScreen from "./screens/UserFirstScreen";
+import { store } from "./store";
+// const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <LoginScreen />
+    <Provider store={store}>
+      <UserFirstScreen />
+    </Provider>
+
     // <NavigationContainer>
     //   <Stack.Navigator>
     //     <Stack.Screen

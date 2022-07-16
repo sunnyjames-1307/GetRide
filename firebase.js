@@ -1,5 +1,7 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/app";
+require("firebase/database");
+require("firebase/firestore");
 require("firebase/auth");
 
 const firebaseConfig = {
@@ -20,5 +22,7 @@ if (firebase.apps.length === 0) {
 }
 
 const auth = firebase.auth();
+const db = firebase.database();
+const firestore = firebase.firestore();
 
-export { auth };
+export { auth, db, firestore };

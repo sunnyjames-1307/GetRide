@@ -5,16 +5,26 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
-import { auth } from "../firebase";
-
+import { auth, firestore } from "../firebase";
+//import from '@react-native-async'
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// import { useNavigation } from "@react-navigation/core";
+//import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./HomeScreen";
+import { useNavigationContainerRef } from "@react-navigation/native";
 const RegisterScreen = () => {
   const [email, setEmail] = React.useState("");
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const navigationRef = useNavigationContainerRef();
 
   //   const [data, setData] = React.useState({
   //     email: "",
@@ -37,11 +47,33 @@ const RegisterScreen = () => {
   //     });
   //   };
 
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       navigation.navigate("Home");
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, []);
+
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
+        // firestore.collection("users").doc(auth().user.uid).set({
+        //   fname: firstName,
+        //   lname: lastName,
+        //   email: email,
+        //   address: address,
+        // });
+        if (userCredentials) {
+          user.updateProfile({
+            fname: firstName,
+            lname: lastName,
+            addr: address,
+          });
+        }
         console.log(user.email);
       })
       .catch((error) => alert(error.message));
@@ -63,10 +95,23 @@ const RegisterScreen = () => {
   //     }
   //   };
   return (
-    <KeyboardAvoidingView style={styles.container} behavio="padding">
-      <Text style={styles.text_footer}>Email</Text>
+    <View style={styles.container} behavior="padding">
+      <View style={styles.header}>
+        <Image
+          source={require("../assets/GETRIDELOGO.jpg")}
+          style={[
+            {
+              width: 210,
+              height: 100,
+              transform: [{ translateX: 85 }, { translateY: 50 }],
+            },
+          ]}
+        />
+      </View>
+
+      <Text style={styles.text_footer}>Sign Up</Text>
       <View style={styles.action}>
-        <FontAwesome name="user-o" color="#05375a" size={20} />
+        <FontAwesome name="envelope-o" color="#05375a" size={20} />
         <TextInput
           placeholder="Your Email"
           style={styles.textInput}
@@ -74,14 +119,6 @@ const RegisterScreen = () => {
           value={email}
           onChangeText={(val) => setEmail(val)}
         />
-        {/* {data.check_textInputChange ? (
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="green" size={20} />
-          </Animatable.View>
-        ) : null} */}
-      </View>
-      <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
-      <View style={styles.action}>
         <FontAwesome name="lock" color="#05375a" size={20} />
         <TextInput
           placeholder="Your password"
@@ -91,20 +128,69 @@ const RegisterScreen = () => {
           autoCapitalize="none"
           onChangeText={(val) => setPassword(val)}
         />
-        {/* <TouchableOpacity onPress={updateSecureTextEntry}>
+      </View>
+      <View style={styles.action}>
+        <FontAwesome name="user-o" color="#05375a" size={20} />
+        <TextInput
+          placeholder="First Name"
+          style={styles.textInput}
+          autoCapitalize="none"
+          value={firstName}
+          onChangeText={(val) => setFirstName(val)}
+        />
+        <TextInput
+          placeholder="Last Name"
+          style={styles.textInput}
+          autoCapitalize="none"
+          value={lastName}
+          onChangeText={(val) => setLastName(val)}
+        />
+      </View>
+      <View style={styles.action}>
+        <FontAwesome name="address-card-o" color="#05375a" size={20} />
+        <TextInput
+          placeholder="Residential Address"
+          style={styles.textInput}
+          autoCapitalize="none"
+          value={address}
+          onChangeText={(val) => setAddress(val)}
+        />
+      </View>
+      {/* {data.check_textInputChange ? (
+          <Animatable.View animation="bounceIn">
+            <Feather name="check-circle" color="green" size={20} />
+          </Animatable.View>
+        ) : null} */}
+
+      {/* <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text> */}
+      {/* <View style={styles.action}>
+       */}
+
+      {/* <TouchableOpacity onPress={updateSecureTextEntry}>
           {data.secureTextEntry ? (
             <Feather name="eye-off" color="grey" size={20} />
           ) : (
             <Feather name="eye" color="grey" size={20} />
           )}
         </TouchableOpacity> */}
-      </View>
+      {/* </View> */}
       <TouchableOpacity onPress={handleSignUp}>
         <View style={styles.button}>
-          <Text style={styles.text}>Register</Text>
+          <Text style={[styles.text, { fontSize: 17 }]}>SIGN UP</Text>
         </View>
       </TouchableOpacity>
-    </KeyboardAvoidingView>
+      <Image
+        source={require("../assets/car2.webp")}
+        style={[
+          {
+            width: 300,
+            height: 200,
+
+            transform: [{ translateX: 40 }, { translateY: 120 }],
+          },
+        ]}
+      />
+    </View>
   );
 };
 
@@ -127,14 +213,17 @@ const styles = StyleSheet.create({
   text_footer: {
     color: "#05375a",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 22,
+    transform: [{ translateX: 40 }, { translateY: 95 }],
   },
   action: {
     flexDirection: "row",
     marginTop: 10,
+    marginBottom: 30,
     borderBottomWidth: 1,
     borderBottomColor: "#f2f2f2",
     paddingBottom: 5,
+    transform: [{ translateX: 40 }, { translateY: 120 }],
   },
   actionError: {
     flexDirection: "row",
@@ -154,13 +243,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   button: {
-    backgroundColor: "#fecb3e",
+    backgroundColor: "#feb000",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 10,
     width: 300,
     height: 40,
-    transform: [{ translateX: 25 }, { translateY: 50 }],
+    transform: [{ translateX: 40 }, { translateY: 130 }],
     marginBottom: 30,
     color: "#020d52",
     fontSize: 60,
