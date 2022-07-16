@@ -33,7 +33,7 @@ const HomeScreen = () => {
           /* do this */
         }}
       >
-        <View style={styles.button}>
+        <View style={styles.Gbutton}>
        
           <Text style={styles.text}>GetRide</Text>
         </View>
@@ -43,7 +43,7 @@ const HomeScreen = () => {
           /* do this */
         }}
       >
-        <View style={styles.Rbutton}>
+        <View style={styles.Sbutton}>
           <Text style={styles.text}>StartRide</Text>
         </View>
       </TouchableOpacity>
@@ -73,37 +73,39 @@ const styles = StyleSheet.create({
   hs1: {
     width: 150,
     height: 150,
-    transform: [{ translateX: -1 }, { translateY: 200 }]
+    transform: [{ translateX: -1 }, { translateY: 150 }]
     
   },
   hs2:{
     width: 150,
     height: 140,
-    transform: [{ translateX: 236 }, { translateY: 50 }]
+    transform: [{ translateX: 236 }, { translateY: 250 }]
   },
   /*hs3:{
     width: 200,
     height: 240,
     transform:[{translateX:90},{translateY:-270}]
   },*/
-  button: {
-    
+  Gbutton: {
+    backgroundColor: "black",
+    fontColor: "#feb000",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 1,
-    width: 100,
-    height: 200,
-    transform: [{ translateX: 40 }, { translateY: -30 }],
+    borderRadius: 20,
+    width: 150,
+    height: 50,
+    transform: [{ translateX: 220 }, { translateY: -70 }],
     marginBottom: 30,
   },
-  Rbutton: {
-    
+  Sbutton: {
+    backgroundColor: "black",
+    fontColor: "#feb000",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 1,
+    borderRadius: 20,
     width: 150,
-    height: 200,
-    transform: [{ translateX: 240 }, { translateY: -260 }],
+    height: 50,
+    transform: [{ translateX: 20 }, { translateY: 100 }],
     marginBottom: 30,
     
   },
