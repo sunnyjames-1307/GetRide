@@ -10,23 +10,14 @@ import RegisterScreen from "./screens/RegisterScreen";
 import FirstScreen from "./screens/FirstScreen";
 import UserFirstScreen from "./screens/UserFirstScreen";
 import { store } from "./store";
-// const Stack = createNativeStackNavigator();
+import Navigator from "./Routes/StackNav"
 export default function App() {
   return (
     <Provider store={store}>
-      <UserFirstScreen />
+      <Navigator/>
     </Provider>
 
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen
-    //       options={{ headerShown: false }}
-    //       name="Login"
-    //       component={LoginScreen}
-    //     />
-    //     <Stack.Screen name="Home" component={HomeScreen} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    
   );
 }
 

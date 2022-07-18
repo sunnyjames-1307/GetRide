@@ -8,8 +8,13 @@ import {
   StatusBar,
 } from "react-native";
 import React from "react";
-
-const FirstScreen = () => {
+export default function FirstScreen({navigation}){
+  const lpressHandler = () => {
+    navigation.navigate('LoginScreen');
+  }
+  const rpressHandler =()=>{
+    navigation.navigate('RegisterScreen')
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -18,18 +23,18 @@ const FirstScreen = () => {
       />
 
       <TouchableOpacity
-        onPress={() => {
-          /* do this */
-        }}
+         onPress ={
+         lpressHandler
+        }
       >
         <View style={styles.button}>
           <Text style={styles.text}>LOGIN</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {
-          /* do this */
-        }}
+        onPress={
+          rpressHandler
+        }
       >
         <View style={styles.button}>
           <Text style={styles.text}>REGISTER</Text>
@@ -39,9 +44,12 @@ const FirstScreen = () => {
       <Image source={require("../assets/car.jpg")} style={styles.svg} />
     </View>
   );
-};
+}
 
-export default FirstScreen;
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -90,3 +98,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
