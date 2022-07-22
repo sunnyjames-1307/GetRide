@@ -11,22 +11,15 @@ import React from "react";
 
 const HomeScreen = () => {
   return (
-   
-    
     <View style={styles.container}>
-      
-    
-      <Image
+      {/* {/* <Image
         source={require("../assets/GETRIDELOGO.jpg")}
         style={styles.logo}
-      />
-       <Image style={styles.hs1}
-        source={require("../assets/hs1.jpg")}
-        />
-         <Image style={styles.hs2}
+      /> */}
+      <Image style={styles.hs1} source={require("../assets/gtr3.jpg")} />
+      {/* <Image style={styles.hs2}
         source={require("../assets/hs2.jpg")}
-        />
-      
+        /> */}
 
       <TouchableOpacity
         onPress={() => {
@@ -34,7 +27,6 @@ const HomeScreen = () => {
         }}
       >
         <View style={styles.Gbutton}>
-       
           <Text style={styles.text}>GetRide</Text>
         </View>
       </TouchableOpacity>
@@ -47,8 +39,6 @@ const HomeScreen = () => {
           <Text style={styles.text}>StartRide</Text>
         </View>
       </TouchableOpacity>
-
-     
     </View>
   );
 };
@@ -65,21 +55,21 @@ const styles = StyleSheet.create({
     width: 395,
     height: 150,
     borderColor: "#feb000",
-    borderRadius:350,
+    borderRadius: 350,
     transform: [{ translateX: 0 }, { translateY: 80 }],
     flexDirection: "row",
     alignItems: "center",
   },
   hs1: {
-    width: 150,
-    height: 150,
-    transform: [{ translateX: -1 }, { translateY: 150 }]
-    
+    width: 400 ,
+    height: 650,
+    transform: [{ translateX: 0 }, { translateY: 200 }],
+    position:'relative',
   },
-  hs2:{
+  hs2: {
     width: 150,
     height: 140,
-    transform: [{ translateX: 236 }, { translateY: 250 }]
+    transform: [{ translateX: 236 }, { translateY: 250 }],
   },
   /*hs3:{
     width: 200,
@@ -87,31 +77,34 @@ const styles = StyleSheet.create({
     transform:[{translateX:90},{translateY:-270}]
   },*/
   Gbutton: {
-    backgroundColor: "black",
-    fontColor: "#feb000",
+    backgroundColor: "#6d9a32",
+    fontColor: "white",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
-    width: 150,
+    borderRadius: 0,
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    width: 300,
     height: 50,
-    transform: [{ translateX: 220 }, { translateY: -70 }],
+    transform: [{ translateX: 50 }, { translateY: -550 }],
     marginBottom: 30,
   },
   Sbutton: {
-    backgroundColor: "black",
+    backgroundColor: "#728dcf",
     fontColor: "#feb000",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
-    width: 150,
+    borderRadius: 0,
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    width: 300,
     height: 50,
-    transform: [{ translateX: 20 }, { translateY: 100 }],
+    transform: [{ translateX: 50 }, { translateY: -550 }],
     marginBottom: 30,
-    
   },
   text: {
     fontSize: 20,
-    color: "#feb000",
+    color: "#f9ede9",
     fontWeight: "bold",
   },
 });

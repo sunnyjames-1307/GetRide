@@ -13,8 +13,8 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
 import { auth } from "../firebase";
-
-const LoginScreen = () => {
+export default function LoginScreen({navigation})
+ {
   const [data, setData] = React.useState({
     email: "",
     password: "",
@@ -30,17 +30,19 @@ const LoginScreen = () => {
   //       password: val,
   //     });
   //   };
-
+ 
+ 
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
+        navigation.navigate('HomeScreen')
         console.log("Logged in with:", user.email);
       })
       .catch((error) => alert(error.message));
   };
-
+  
   //   const updateSecureTextEntry = (val) => {
   //     setData({
   //       ...data,
@@ -132,7 +134,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+
 
 const styles = StyleSheet.create({
   footer: {

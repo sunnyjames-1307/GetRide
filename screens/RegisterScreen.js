@@ -11,20 +11,20 @@ import React, { useEffect } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
-import { auth, firestore } from "../firebase";
+import { auth, db, firestore } from "../firebase";
 //import from '@react-native-async'
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 // import { useNavigation } from "@react-navigation/core";
 //import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./HomeScreen";
 import { useNavigationContainerRef } from "@react-navigation/native";
-const RegisterScreen = () => {
+export default function RegisterScreen({navigation}) {
   const [email, setEmail] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [address, setAddress] = React.useState("");
-  const navigationRef = useNavigationContainerRef();
+  
 
   //   const [data, setData] = React.useState({
   //     email: "",
@@ -61,18 +61,19 @@ const RegisterScreen = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
+        navigation.navigate('HomeScreen')
         // firestore.collection("users").doc(auth().user.uid).set({
         //   fname: firstName,
         //   lname: lastName,
         //   email: email,
         //   address: address,
         // });
-        if (userCredentials) {
-          user.updateProfile({
+        if (user.uid) {
+        db.ref("users/"+user.uid).set({
             fname: firstName,
             lname: lastName,
             addr: address,
-          });
+          }).then(()=>alert('data submitted')).catch((error)=>alert(error)); 
         }
         console.log(user.email);
       })
@@ -174,8 +175,8 @@ const RegisterScreen = () => {
           )}
         </TouchableOpacity> */}
       {/* </View> */}
-      <TouchableOpacity onPress={handleSignUp}>
-        <View style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <View >
           <Text style={[styles.text, { fontSize: 17 }]}>SIGN UP</Text>
         </View>
       </TouchableOpacity>
@@ -194,7 +195,7 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+
 
 const styles = StyleSheet.create({
   footer: {
