@@ -10,11 +10,12 @@ import RegisterScreen from "./screens/RegisterScreen";
 import FirstScreen from "./screens/FirstScreen";
 import UserFirstScreen from "./screens/UserFirstScreen";
 import { store } from "./store";
+import UserScreen from "./screens/UserScreen";
 // const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <Provider store={store}>
-      <UserFirstScreen />
+      <HomeScreen />
     </Provider>
 
     // <NavigationContainer>

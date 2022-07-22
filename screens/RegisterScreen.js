@@ -11,8 +11,8 @@ import React, { useEffect } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
-import { auth, firestore } from "../firebase";
-//import from '@react-native-async'
+import { auth, firestore, db } from "../firebase";
+import { ref, set } from "firebase/database";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 // import { useNavigation } from "@react-navigation/core";
 //import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -47,33 +47,23 @@ const RegisterScreen = () => {
   //     });
   //   };
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       navigation.navigate("Home");
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, []);
-
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        // firestore.collection("users").doc(auth().user.uid).set({
-        //   fname: firstName,
-        //   lname: lastName,
-        //   email: email,
-        //   address: address,
-        // });
-        if (userCredentials) {
-          user.updateProfile({
-            fname: firstName,
-            lname: lastName,
-            addr: address,
-          });
+
+        if (user.uid) {
+          db.ref("users/" + user.uid)
+            .set({
+              firstName: firstName,
+              lastName: lastName,
+              addr: address,
+            })
+            .then(() => alert("data submitted"))
+            .catch((error) => alert(error));
         }
+
         console.log(user.email);
       })
       .catch((error) => alert(error.message));
