@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   hs1: {
     width: 500,
     height: 650,
-    transform: [{ translateX: 0 }, { translateY: 70 }],
+    position: "relative",
+    // transform: [{ translateX: 0 }, { translateY: 70 }],
   },
   hs2: {
     width: 150,

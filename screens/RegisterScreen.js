@@ -164,8 +164,8 @@ const RegisterScreen = () => {
           )}
         </TouchableOpacity> */}
       {/* </View> */}
-      <TouchableOpacity onPress={handleSignUp}>
-        <View style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <View>
           <Text style={[styles.text, { fontSize: 17 }]}>SIGN UP</Text>
         </View>
       </TouchableOpacity>
