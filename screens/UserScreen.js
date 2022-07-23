@@ -2,13 +2,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
-
+import { db } from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const UserScreen = () => {
-  const handlePress = () => false;
+  const dbRef = db.ref();
+  //const handlePress = () => false;
   return (
     <View>
       <Text style={styles.heading}>Find a ride</Text>
+      <View on></View>
       <View style={styles.location}>
         <GooglePlacesAutocomplete
           placeholder="Where from"

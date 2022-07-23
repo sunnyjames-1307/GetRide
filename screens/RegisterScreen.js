@@ -56,6 +56,7 @@ const RegisterScreen = () => {
         if (user.uid) {
           db.ref("users/" + user.uid)
             .set({
+              email: email,
               firstName: firstName,
               lastName: lastName,
               addr: address,
