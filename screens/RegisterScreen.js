@@ -7,7 +7,7 @@ import {
   View,
   Image,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
@@ -52,7 +52,6 @@ const RegisterScreen = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-
         if (user.uid) {
           db.ref("users/" + user.uid)
             .set({
@@ -70,6 +69,7 @@ const RegisterScreen = () => {
       .catch((error) => alert(error.message));
   };
 
+  // export userId;
   //   const textInputChange = (val) => {
   //     if (val.length != 0) {
   //       setData({

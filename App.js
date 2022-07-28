@@ -15,7 +15,7 @@ import UserScreen from "./screens/UserScreen";
 export default function App() {
   return (
     <Provider store={store}>
-      <RegisterScreen />
+      <UserScreen />
     </Provider>
 
     // <NavigationContainer>
