@@ -1,10 +1,22 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  Button,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { setDestination, setOrigin } from "../slices/navigationSlice";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { db, auth } from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import RNDateTimePicker from "@react-native-community/datetimepicker";
+
 const UserScreen = () => {
+  const dispatch = useDispatch();
   const dbRef = db.ref();
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -66,8 +78,14 @@ const UserScreen = () => {
             },
           }}
           onPress={(data, details = null) => {
-            console.log(data);
-            console.log(details);
+            dispatch(
+              setOrigin({
+                location: details?.geometry.location,
+                description: data.description,
+              })
+            );
+            console.log(data.description);
+            // console.log(details);
           }}
           fetchDetails={true}
           returnKeyType={"search"}
@@ -91,8 +109,14 @@ const UserScreen = () => {
             },
           }}
           onPress={(data, details = null) => {
-            console.log(data);
-            console.log(details);
+            dispatch(
+              setDestination({
+                location: details?.geometry.location,
+                description: data.description,
+              })
+            );
+            console.log(data.description);
+            // console.log(details);
           }}
           fetchDetails={true}
           returnKeyType={"search"}
@@ -106,29 +130,16 @@ const UserScreen = () => {
           debounce={400}
         />
       </View>
-
-      <View>
-        <TouchableOpacity
-          style={styles.Sbutton}
-          onPress={() => {
-            /* do this */
-          }}
-        >
-          <View>
-            <Text style={styles.text}>Today</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.Gbutton}
-          onPress={() => {
-            /* do this */
-          }}
-        >
-          <View>
-            <Text style={styles.text}>Now</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={styles.Gbutton}
+        onPress={() => {
+          /* do this */
+        }}
+      >
+        <View>
+          <Text style={styles.text}>Find Trip</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -136,6 +147,11 @@ const UserScreen = () => {
 export default UserScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   location: {
     transform: [{ translateY: 50 }],
     width: 360,
@@ -163,20 +179,20 @@ const styles = StyleSheet.create({
     transform: [{ translateX: 20 }, { translateY: 230 }],
   },
   Sbutton: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     fontColor: "black",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 5,
     borderRadius: 5,
-    width: 150,
+    width: 250,
     height: 50,
-    transform: [{ translateY: 200 }],
+    transform: [{ translateY: 40 }],
     marginBottom: 30,
-    marginLeft: 18,
+    marginLeft: 15,
   },
   Gbutton: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     fontColor: "black",
     alignItems: "center",
     justifyContent: "center",
@@ -185,11 +201,11 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
     transform: [{ translateY: 120 }],
-    marginLeft: 220,
+    marginLeft: 120,
   },
   text: {
     fontSize: 20,
-    color: "black",
+    color: "white",
     fontWeight: "bold",
   },
 });
