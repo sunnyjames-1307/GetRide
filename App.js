@@ -8,7 +8,6 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import FirstScreen from "./screens/FirstScreen";
-import UserFirstScreen from "./screens/UserFirstScreen";
 import { store } from "./store";
 import Navigator from "./Routes/StackNav"
 export default function App() {

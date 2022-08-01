@@ -4,8 +4,15 @@ import HomeScreen from "../screens/HomeScreen"
 import FirstScreen from "../screens/FirstScreen"
 import LoginScreen from "../screens/LoginScreen"
 import RegisterScreen from "../screens/RegisterScreen"
-import UserFirstScreen from "../screens/UserFirstScreen"
+import UserScreen from "../screens/UserScreen"
+import RouteScreen from "../screens/RouteScreen"
+import VehicleConfirm from "../components/VehicleConfirm";
 const screens={
+    VehicleConfirm:{
+        screen: VehicleConfirm,
+        navigationOptions: { headerShown: false }
+
+    },
     FirstScreen:{
         screen: FirstScreen,
         navigationOptions: { headerShown: false }
@@ -23,9 +30,14 @@ const screens={
         screen: RegisterScreen,
         navigationOptions: { headerShown: false }
     },
-    UserFirstScreen:{
-        screen: UserFirstScreen,
+    UserScreen:{
+        screen: UserScreen, 
         navigationOptions: { headerShown: false }
+    },
+    RouteScreen: {
+        screen: RouteScreen,
+        navigationOptions: { headerShown: false }
+
     }
 
 }

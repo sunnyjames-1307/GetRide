@@ -8,8 +8,13 @@ import {
   StatusBar,
 } from "react-native";
 import React from "react";
+import { useNavigation } from '@react-navigation/native'
 
-const HomeScreen = () => {
+export default function HomeScreen({ navigation }) {
+  const rpressHandler = () => {
+    console.log('hwy')
+    navigation.navigate('RouteScreen')
+  }
   return (
     <View style={styles.container}>
       {/* {/* <Image
@@ -31,9 +36,10 @@ const HomeScreen = () => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {
+        onPress={
           /* do this */
-        }}
+          rpressHandler
+        }
       >
         <View style={styles.Sbutton}>
           <Text style={styles.text}>StartRide</Text>
@@ -43,7 +49,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+// export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -61,10 +67,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   hs1: {
-    width: 400 ,
+    width: 400,
     height: 650,
     transform: [{ translateX: 0 }, { translateY: 200 }],
-    position:'relative',
+    position: 'relative',
   },
   hs2: {
     width: 150,
